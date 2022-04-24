@@ -15,6 +15,17 @@ class GildedRoseTest extends TestCase
         $items = [new Item('foo', 0, 0)];
         $gildedRose = new GildedRose($items);
         $gildedRose->updateQuality();
-        $this->assertSame('fixme', $items[0]->name);
+        $this->assertSame('foo', $items[0]->name);
+    }
+
+    public function test_global()
+    {
+        ob_start();
+        include_once __DIR__ . "/../fixtures/texttest_fixture.php";
+        $result = ob_get_clean();
+
+        $expected = file_get_contents(__DIR__ . '/approvals/ApprovalTest.testTestFixture.approved.txt');
+
+        $this->assertSame($expected, $result);
     }
 }
