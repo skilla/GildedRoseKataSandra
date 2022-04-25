@@ -4,22 +4,29 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use GildedRose\AgedBrie;
+use GildedRose\BackstagePasses;
+use GildedRose\CompositeItem;
+use GildedRose\DexterityVest;
+use GildedRose\ElixirMongoose;
 use GildedRose\GildedRose;
 use GildedRose\Item;
+use GildedRose\ManaCake;
+use GildedRose\Sulfuras;
 
 echo 'OMGHAI!' . PHP_EOL;
 
 $items = [
-    new Item('+5 Dexterity Vest', 10, 20),
-    new Item('Aged Brie', 2, 0),
-    new Item('Elixir of the Mongoose', 5, 7),
-    new Item('Sulfuras, Hand of Ragnaros', 0, 80),
-    new Item('Sulfuras, Hand of Ragnaros', -1, 80),
-    new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20),
-    new Item('Backstage passes to a TAFKAL80ETC concert', 10, 49),
-    new Item('Backstage passes to a TAFKAL80ETC concert', 5, 49),
+    DexterityVest::create(10, 20),
+    AgedBrie::create(2, 0),
+    ElixirMongoose::create(5, 7),
+    Sulfuras::create(0, 80),
+    Sulfuras::create(-1, 80),
+    new Item(BackstagePasses::NAME, 15, 20),
+    new CompositeItem(BackstagePasses::NAME, 10, 49),
+    BackstagePasses::create(5, 49),
     // this conjured item does not work properly yet
-    new Item('Conjured Mana Cake', 3, 6),
+    ManaCake::create(3, 6),
 ];
 
 $app = new GildedRose($items);
